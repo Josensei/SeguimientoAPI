@@ -8,6 +8,6 @@ namespace SeguimientoAPI.Models
             : base(options) 
         {
         }
-    public DbSet<Pedido> Vehicles { get; set; }
+    public DbSet<Vehicle> Vehicles { get; set; }
     }
 }

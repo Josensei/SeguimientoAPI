@@ -10,7 +10,7 @@ using SeguimientoAPI.Models;
 
 namespace SeguimientoAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/Vehicles")]
     [ApiController]
     public class VehiclesController : ControllerBase
     {
@@ -23,14 +23,14 @@ namespace SeguimientoAPI.Controllers
 
         // GET: api/Vehicles
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Pedido>>> GetVehicles()
+        public async Task<ActionResult<IEnumerable<Vehicle>>> GetVehicles()
         {
             return await _context.Vehicles.ToListAsync();
         }
 
         // GET: api/Vehicles/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Pedido>> GetVehicle(long id)
+        public async Task<ActionResult<Vehicle>> GetVehicle(long id)
         {
             var vehicle = await _context.Vehicles.FindAsync(id);
 
@@ -45,7 +45,7 @@ namespace SeguimientoAPI.Controllers
         // PUT: api/Vehicles/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutVehicle(long id, Pedido vehicle)
+        public async Task<IActionResult> PutVehicle(long id, Vehicle vehicle)
         {
             if (id != vehicle.Id)
             {
@@ -76,7 +76,7 @@ namespace SeguimientoAPI.Controllers
         // POST: api/Vehicles
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Pedido>> PostVehicle(Pedido vehicle)
+        public async Task<ActionResult<Vehicle>> PostVehicle(Vehicle vehicle)
         {
             _context.Vehicles.Add(vehicle);
             await _context.SaveChangesAsync();
