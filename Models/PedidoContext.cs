@@ -1,14 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Diagnostics.CodeAnalysis;
-
 namespace SeguimientoAPI.Models
 {
-    public class VehicleContext :DbContext
+    public class PedidoContext : DbContext
     {
-        public VehicleContext(DbContextOptions<VehicleContext> options)
+        public PedidoContext(DbContextOptions<PedidoContext> options)
             : base(options) 
         {
         }
-    public DbSet<Vehicle> Vehicles { get; set; }
+        public DbSet<Pedido> Pedidos { get; set; }  
     }
 }
