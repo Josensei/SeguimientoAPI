@@ -12,23 +12,23 @@ namespace SeguimientoAPI.Controllers
 {
     [Route("api/Pedidos")]
     [ApiController]
-    public class PedidoesController : ControllerBase
+    public class PedidosController : ControllerBase
     {
         private readonly PedidoContext _context;
 
-        public PedidoesController(PedidoContext context)
+        public PedidosController(PedidoContext context)
         {
             _context = context;
         }
 
-        // GET: api/Pedidoes
+        // GET: api/Pedidos
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Pedido>>> GetPedidos()
         {
             return await _context.Pedidos.ToListAsync();
         }
 
-        // GET: api/Pedidoes/5
+        // GET: api/Pedidos/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Pedido>> GetPedido(long id)
         {
@@ -42,7 +42,7 @@ namespace SeguimientoAPI.Controllers
             return pedido;
         }
 
-        // PUT: api/Pedidoes/5
+        // PUT: api/Pedidos/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutPedido(long id, Pedido pedido)
@@ -73,7 +73,7 @@ namespace SeguimientoAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Pedidoes
+        // POST: api/Pedidos
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Pedido>> PostPedido(Pedido pedido)
@@ -84,7 +84,7 @@ namespace SeguimientoAPI.Controllers
             return CreatedAtAction("GetPedido", new { id = pedido.Id }, pedido);
         }
 
-        // DELETE: api/Pedidoes/5
+        // DELETE: api/Pedidos/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePedido(long id)
         {

@@ -15,16 +15,19 @@ namespace SeguimientoAPI.Controllers
     public class VehiclesController : ControllerBase
     {
         private readonly VehicleContext _context;
+        private readonly PedidoContext _pedidoContext;
 
-        public VehiclesController(VehicleContext context)
+        public VehiclesController(VehicleContext context, PedidoContext pedido)
         {
             _context = context;
+            _pedidoContext = pedido;
         }
 
         // GET: api/Vehicles
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Vehicle>>> GetVehicles()
         {
+
             return await _context.Vehicles.ToListAsync();
         }
 
@@ -38,7 +41,7 @@ namespace SeguimientoAPI.Controllers
             {
                 return NotFound();
             }
-
+            
             return vehicle;
         }
 
@@ -73,6 +76,48 @@ namespace SeguimientoAPI.Controllers
             return NoContent();
         }
 
+        [HttpPut("{id}/Pedido")]
+        public async Task<IActionResult> PutOrder(long id, PedidoID pedidoId )
+        {
+            var vehicle = await _context.Vehicles.FindAsync(id);
+
+            if (vehicle == null)
+            {
+                return NotFound();
+            }
+
+            var pedido = await _pedidoContext.Pedidos.FindAsync(pedidoId.id);
+            if (pedido == null)
+            {
+                return NotFound();
+            }
+            
+            vehicle.Pedidos.Add(pedido);
+
+            _context.Entry(vehicle).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!VehicleExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            //            Console.WriteLine(vehicle.Pedidos.Count
+            //);
+            //            Console.WriteLine(pedido.ToString);
+
+            return NoContent();
+        }
         // POST: api/Vehicles
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]

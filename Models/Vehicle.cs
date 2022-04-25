@@ -5,8 +5,8 @@
         public long Id { get; set; }
         public string? Driver { get; set; }
         public string? gps{ get; set; }
+        public List<Pedido>? Pedidos { get; set; } = new List<Pedido>();
 
-        public Pedido? Pedido { get; set; } 
 
         //public string? coordenadas{ get; set; }
     }
